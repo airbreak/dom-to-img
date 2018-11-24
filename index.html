@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Page Title</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+
+</head>
+<body>
+  <div class="main-box" id="my-post-src">
+    <img class="bg-box" src="images/4.jpg"/>
+    <div class="my-post-main">
+      <h1>测试dom转化成图片</h1>
+      <div class="logo-box">
+        <img class="logo" src="images/headimg_6.jpg"/>
+        <div>
+          <span>hello world</span>
+        </div>
+      </div>
+      <input type="button" id="saveImg"/>
+    </div>
+  </div>
+  <div id="my-post-dist">
+    <img id="dist-img" src="">
+    <div>长按保存</div>
+  </div>
+</body>
+<script src="jquery.min.js"></script>
+<script src="flexible.js"></script>
+<script src="dom-to-image.min.js"></script>
+<script src="html2canvas.min.js"></script>
+<script>
+  // var domtoimage = require('dom-to-image.min');
+  $(document).on('click', '#saveImg',() => {
+    // var node = $('#my-post-src')[0];
+    // domtoimage.toPng(node)
+    //   .then(function (dataUrl) {
+    //     $('#dist-img').attr('src', dataUrl);
+    //     $('#my-post-dist').addClass('show');
+    //   })
+    //   .catch(function (error) {
+    //     console.error('oops, something went wrong!', error);
+    //   });
+    
+
+    html2canvas(document.querySelector("#my-post-src")).then(canvas => {
+      // document.body.appendChild(canvas)
+       $('#dist-img').attr('src', canvas.toDataURL("image/png"))
+       $('#my-post-dist').addClass('show');
+    });
+  })
+</script>
+</html>
